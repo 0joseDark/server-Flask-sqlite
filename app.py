@@ -9,9 +9,13 @@ app.secret_key = os.urandom(24)  # Chave secreta para sessões
 
 # Simulação de um banco de dados de usuários
 users = {
-    1: {'id': 1, 'username': 'user1', 'password_hash': generate_password_hash('password1')},
-    2: {'id': 2, 'username': 'user2', 'password_hash': generate_password_hash('password2')}
+    1: {'id': 1, 'username': 'user1', 'password_hash': generate_password_hash('password1'), 'email': 'user1@example.com'},
+    2: {'id': 2, 'username': 'user2', 'password_hash': generate_password_hash('password2'), 'email': 'user2@example.com'}
 }
+
+# Função para verificar se um usuário já existe
+def user_exists(username):
+    return any(user['username'] == username for user in users.values())
 
 # Rota para a página inicial (login/register)
 @app.route('/')
@@ -30,6 +34,28 @@ def login():
         return jsonify({'redirect': url_for('files')})  # Redireciona para /files após login
     
     return jsonify({'error': 'Invalid credentials'}), 401
+
+# Rota para criar uma nova conta de usuário
+@app.route('/register', methods=['POST'])
+def register():
+    username = request.json.get('username')
+    password = request.json.get('password')
+    email = request.json.get('email')
+
+    # Verifica se o usuário já existe
+    if user_exists(username):
+        return jsonify({'error': 'Username already exists'}), 400
+
+    # Cria um novo usuário
+    user_id = max(users.keys()) + 1
+    users[user_id] = {
+        'id': user_id,
+        'username': username,
+        'password_hash': generate_password_hash(password),
+        'email': email
+    }
+
+    return jsonify({'redirect': url_for('files')})  # Redireciona para /files após registro
 
 # Rota para a página de arquivos
 @app.route('/files')

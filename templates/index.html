@@ -5,17 +5,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login/Register</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Login</h1>
+    <h1>Login/Register</h1>
+    
+    <!-- Formulário de login -->
     <form id="login-form">
         <input type="text" id="username" placeholder="Username" required><br>
         <input type="password" id="password" placeholder="Password" required><br>
         <button type="submit">Login</button>
     </form>
-    <div id="message"></div>
+
+    <!-- Mensagem de erro para login -->
+    <div id="login-message"></div>
+
+    <!-- Formulário de registro -->
+    <form id="register-form">
+        <input type="text" id="reg-username" placeholder="Username" required><br>
+        <input type="password" id="reg-password" placeholder="Password" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- Mensagem de erro para registro -->
+    <div id="register-message"></div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>

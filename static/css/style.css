@@ -38,25 +38,8 @@ form button {
     cursor: pointer;
 }
 
-#message {
+#login-message, #register-message {
     text-align: center;
     color: red;
     margin-top: 10px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 5px;
-}
-
-a {
-    display: block;
-    margin-top: 10px;
-    text-align: center;
-    color: #007bff;
-    text-decoration: none;
 }
