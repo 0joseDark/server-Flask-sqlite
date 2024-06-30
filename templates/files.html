@@ -5,18 +5,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Files</title>
+    <title>User Files</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Files</h1>
-    <ul id="file-list">
+    <h1>User Files</h1>
+    
+    <!-- Lista de arquivos do usuário -->
+    <ul>
         {% for file in user_files %}
         <li>{{ file }}</li>
         {% endfor %}
     </ul>
-    <a href="/logout">Logout</a>
 
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <a href="/logout">Logout</a>
 </body>
 </html>

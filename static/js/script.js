@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to login');
+                const data = await response.json();
+                throw new Error(data.error || 'Failed to login');
             }
 
             const result = await response.json();
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error('Login error:', error.message);
-            document.getElementById('login-message').textContent = 'Failed to login';
+            document.getElementById('login-message').textContent = error.message;
         }
     });
 
@@ -51,13 +52,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                throw new Error('Failed to register');
+                const data = await response.json();
+                throw new Error(data.error || 'Failed to register');
             }
 
             const result = await response.json();
-            // Redireciona para a URL fornecida pelo servidor após o registro
-            window.location.href = result.redirect;
+            document.getElementById('register-message').textContent = result.message;
 
         } catch (error) {
             console.error('Registration error:', error.message);
-            document.getElementById('register-message').textContent = '
+            document.getElementById('register-message').textContent = error.message;
+        }
+    });
+});
