@@ -4,20 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register User</title>
+    <title>User Authentication</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Register User</h1>
-    <form id="register-form">
-        <input type="text" id="username" placeholder="Username" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button type="submit">Register</button>
-    </form>
+    <h1>Register or Login</h1>
+    <div id="register-section">
+        <h2>Register</h2>
+        <form id="register-form">
+            <input type="text" id="register-username" placeholder="Username" required>
+            <input type="password" id="register-password" placeholder="Password" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    <div id="login-section">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="login-username" placeholder="Username" required>
+            <input type="password" id="login-password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
     <script>
         document.getElementById('register-form').addEventListener('submit', function(event) {
             event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+            const username = document.getElementById('register-username').value;
+            const password = document.getElementById('register-password').value;
 
             fetch('/register', {
                 method: 'POST',
@@ -29,6 +41,28 @@
             .then(response => response.json())
             .then(data => {
                 alert(data.message || data.error);
+            });
+        });
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    window.location.href = '/files';
+                } else {
+                    alert(data.error);
+                }
             });
         });
     </script>
