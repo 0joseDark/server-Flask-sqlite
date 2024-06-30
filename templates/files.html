@@ -1,4 +1,5 @@
 <!-- templates/files.html -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,14 +9,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <h1>Your Files</h1>
-    <form id="upload-form">
-        <input type="file" id="file-input" name="file" required>
-        <button type="submit">Upload</button>
-    </form>
-    <div id="message"></div>
+    <h1>Files</h1>
     <ul id="file-list">
-        <!-- List of files will be populated here -->
+        {% for file in user_files %}
+        <li>{{ file }}</li>
+        {% endfor %}
     </ul>
     <a href="/logout">Logout</a>
 
