@@ -5,24 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Files</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <h1>Your Files</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" required>
+    <form id="upload-form">
+        <input type="file" id="file-input" name="file" required>
         <button type="submit">Upload</button>
     </form>
-    <ul>
-        {% for file in files %}
-        <li>
-            <a href="/download/{{ file }}">{{ file }}</a>
-            <form action="/delete/{{ file }}" method="post" style="display:inline;">
-                <button type="submit">Delete</button>
-            </form>
-        </li>
-        {% endfor %}
+    <div id="message"></div>
+    <ul id="file-list">
+        <!-- List of files will be populated here -->
     </ul>
     <a href="/logout">Logout</a>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
