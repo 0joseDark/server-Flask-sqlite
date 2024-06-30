@@ -9,9 +9,18 @@
 </head>
 <body>
     <h1>Your Files</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
     <ul>
         {% for file in files %}
-        <li>{{ file }}</li>
+        <li>
+            <a href="/download/{{ file }}">{{ file }}</a>
+            <form action="/delete/{{ file }}" method="post" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
         {% endfor %}
     </ul>
     <a href="/logout">Logout</a>

@@ -17,3 +17,18 @@ input, button {
 button {
     cursor: pointer;
 }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+li a {
+    margin-right: 10px;
+    text-decoration: none;
+    color: blue;
+}
